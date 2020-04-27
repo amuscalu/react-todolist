@@ -7,9 +7,9 @@ class Header extends Component {
 			<header style={styleHeader}>
 				<h1>ToDoList</h1>
 
-				<Link to="/react-todolist"> Home </Link>
+				<Link to="/"> Home </Link>
 				|
-				<Link to="/react-todolist/about"> About </Link>
+				<Link to="/about"> About </Link>
 			</header>
 		);
 	}

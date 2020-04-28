@@ -40,17 +40,20 @@ class App extends Component {
           completed: false
         }
       ];
-      localStorage.setItem('todos', JSON.stringify(todos));
     } else {
-      todos = JSON.parse(localStorage.getItem('todos'));
+      todos = JSON.parse( localStorage.getItem('todos') );
     }
 
     this.setState({ todos: todos });
   }
 
+  componentDidUpdate = () => {
+    localStorage.setItem( 'todos', JSON.stringify(this.state.todos) );
+  }
+
   markComplete = (id) => {
     this.setState({ todos: this.state.todos.map(todo => {
-      if (todo.id === id) {
+      if ( todo.id === id ) {
         todo.completed = !todo.completed;
       }
 
@@ -61,7 +64,7 @@ class App extends Component {
   delTodo = (id) => {
     const NewTodos = [...this.state.todos.filter(todo => todo.id !== id)];
 
-    this.updateTodos(NewTodos);
+    this.setState({ todos: NewTodos });
   }
 
   Addtodo = (title) => {
@@ -74,12 +77,7 @@ class App extends Component {
     const newTodos = [...this.state.todos, newTodo]
     .sort((a, b) => a.title.toLowerCase() !== b.title.toLowerCase() ? a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1 : 0);
 
-    this.updateTodos(newTodos);
-  }
-
-  updateTodos = (todos) => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-    this.setState({ todos: todos });
+    this.setState({ todos: newTodos });
   }
 
   render() {
